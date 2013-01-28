@@ -1,6 +1,6 @@
 Package: ExactCIdiff
-Version: 1.1
-Date: 2012-12-22
+Version: 1.2
+Date: 2013-01-28
 Title: Inductive Confidence Intervals for the difference between two
         proportions
 Author: Guogen Shan <guogen.shan@unlv.edu>, Weizhen Wang
@@ -13,6 +13,6 @@ License: GPL (>= 2)
 URL: http://www.r-project.org,
         http://www.wright.edu/~weizhen.wang/wanghome.htm,
         http://faculty.unlv.edu/gshan/
-Packaged: 2012-12-24 20:24:33 UTC; Guogen Shan
+Packaged: 2013-01-28 21:40:04 UTC; Guogen Shan
 Repository: CRAN
-Date/Publication: 2012-12-24 21:47:50
+Date/Publication: 2013-01-29 07:16:42

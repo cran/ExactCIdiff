@@ -349,7 +349,7 @@ NCnomiss<-NCnomiss[order(-NCnomiss[,3]),]
 morepoint<-sum(NCnomiss[,3]>=NCnomiss[1,3]-delta)
 if(morepoint>=2){
 Ls[(kk+1):(kk+morepoint),1:2]<-NCnomiss[1:morepoint,1:2]
-Ls[(kk+1):(kk+morepoint),4]<-NCnomiss[1:morepoint,3]
+Ls[(kk+1):(kk+morepoint),4]<-morepointLsest(kk+morepoint) ## the same CI for the table in the same group
 
 for(iq in 1:morepoint)
 {partvector<-round(Ls[kk+iq,1]*(m+2)+Ls[kk+iq,2])

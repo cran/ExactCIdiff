@@ -57,7 +57,7 @@ Details and more examples see: http://www.wright.edu/~weizhen.wang/software/Exac
 }
 
 \value{
-BinomCI gives the estimate of (p1-p2), which is x/n-y/m, and the exact one sided confidence interval.
+BinomCI gives the estimate of (p1-p2), which is x/n1-y/n2, and the exact one sided confidence interval.
 
 PairedCI gives the estimate of (p1-p2), which is (n12/-n21)/(n12+t+n21), and the exact one sided confidence interval.
 }
@@ -65,10 +65,10 @@ PairedCI gives the estimate of (p1-p2), which is (n12/-n21)/(n12+t+n21), and the
 
 \examples{
 
-#lower confidence interval for the difference of two independent proportions with n=4,m=1,x=2,and y=0 in Wang 2010 
+#lower confidence interval for the difference of two independent proportions with n1=4,m=n2=1,x=2,and y=0 in Wang 2010 
 BinomCI(4,1,2,0)
 
-#Upper confidence interval for the difference of two independent proportions with n=4,m=1,x=2,and y=0.
+#Upper confidence interval for the difference of two independent proportions with n1=4,n2=1,x=2,and y=0.
 BinomCI(4,1,2,0,alternative="Upper")
 
 #lower confidence intervals for the difference of two dependent proportions in the Table 1 of Wang 2012 

@@ -1,4 +1,4 @@
-BinomCI<-function (n1, n2, x, y, confidence.level = 0.95, alternative = "Lower", precision = 0.00001,grid.one=30,grid.two=20) 
+BinomCI<-function (n1, n2, x, y, conf.level = 0.95, CItype = "Two.sided", precision = 0.00001,grid.one=30,grid.two=20) 
 {
     if (length(n1) != 1 || (n1 < 1)) {
         stop("number of subjects n1 must be a positive integer")
@@ -21,22 +21,30 @@ BinomCI<-function (n1, n2, x, y, confidence.level = 0.95, alternative = "Lower",
     if (length(y) != 1 || (y < 0) || (y > n2)) {
         stop("observed number of response y must be an integer betwen 0 and n2")
     }    
-    if (length(confidence.level) != 1 || confidence.level < 0 || confidence.level > 
+    if (length(conf.level) != 1 || conf.level < 0 || conf.level > 
         1) {
-        stop("confidence.level must be a positive number between 0 and 1, default 0.95")
+        stop("conf.level must be a positive number between 0 and 1, default 0.95")
     }
     if (length(precision) != 1 || precision < 0) {
         stop("precision must be a positive number, default 0.00001")
     }
-    alternative <- match.arg(alternative, choices = c("Lower", 
-        "Upper"))
-    CI <- BinomialCIone(n1=n1, n2=n2, x=x, y=y, confidence.level = confidence.level, alternative = alternative,precision=precision,grid.one=grid.one,grid.two=grid.two)
-    Result <- list(confidence.level = confidence.level, alternative = alternative,estimate = CI[1], ExactOneCI = CI[2:3])
+    CItype <- match.arg(CItype, choices = c("Lower", 
+        "Upper","Two.sided"))
+    if(CItype=="Two.sided"){
+    CIlower <- BinomialCIone(n1=n1, n2=n2, x=x, y=y, conf.level = 1-(1-conf.level)/2, CItype = "Lower",precision=precision,grid.one=grid.one,grid.two=grid.two)
+    CIupper <- BinomialCIone(n1=n1, n2=n2, x=x, y=y, conf.level = 1-(1-conf.level)/2, CItype = "Upper",precision=precision,grid.one=grid.one,grid.two=grid.two)
+CIoutput<-c(CIlower[2],CIupper[3])
+    Result <- list(conf.level = conf.level, CItype = CItype,estimate = CIupper[1], ExactCI = CIoutput)
     Result
+}else{
+    CI <- BinomialCIone(n1=n1, n2=n2, x=x, y=y, conf.level = conf.level, CItype = CItype,precision=precision,grid.one=grid.one,grid.two=grid.two)
+    Result <- list(conf.level = conf.level, CItype = CItype,estimate = CI[1], ExactCI = CI[2:3])
+    Result
+     }
 }
 
 
-BinomialCIone<-function(n1,n2,x,y,confidence.level,alternative,precision,grid.one,grid.two){
+BinomialCIone<-function(n1,n2,x,y,conf.level,CItype,precision,grid.one,grid.two){
 n<-n1
 m<-n2
 pround=0
@@ -48,7 +56,7 @@ datavectorU<-(n-x)*(m+2)+m-y
 output<-c()
 output[1]<-round(x/n-y/m,digits=6)
 delta<-10^(-10)
-alpha<-1-confidence.level
+alpha<-1-conf.level
 f<-array(,dim=c((n+1)*(m+1),6))
 S<-array(,dim=c((n+1)*(m+1),2))
 N<-array(,dim=c((n+1)*(m+1),3))
@@ -120,10 +128,10 @@ kk=1
 kk1=1
 dimoftable<-dim(Ls)[1]
 
-if(x==n && y==0 && alternative=="Lower"){output[2]=Ls[1,4];output[3]=1;kk<-dimoftable}
-if(x==0 && y==m && alternative=="Lower"){output[2]=-1;output[3]=1;kk<-dimoftable}
-if(x==n && y==0 && alternative=="Upper"){output[2]=-1;output[3]=1;kk<-dimoftable}
-if(x==0 && y==m && alternative=="Upper"){output[2]=-1;output[3]=-Ls[1,4];kk<-dimoftable}
+if(x==n && y==0 && CItype=="Lower"){output[2]=Ls[1,4];output[3]=1;kk<-dimoftable}
+if(x==0 && y==m && CItype=="Lower"){output[2]=-1;output[3]=1;kk<-dimoftable}
+if(x==n && y==0 && CItype=="Upper"){output[2]=-1;output[3]=1;kk<-dimoftable}
+if(x==0 && y==m && CItype=="Upper"){output[2]=-1;output[3]=-Ls[1,4];kk<-dimoftable}
 
 
 
@@ -367,7 +375,7 @@ allvector<-setdiff(allvector,partvector)
 kk=kk+1
 }
 
-if(alternative=="Lower"){ ## Lower limits
+if(CItype=="Lower"){ ## Lower limits
 if((is.element(datavectorL,allvector)*1)==0){
    for(jj in (kk1+1):kk){
         if(Ls[jj,1]==x && Ls[jj,2]==y){output[2]=Ls[jj,4]}

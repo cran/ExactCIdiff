@@ -1,6 +1,6 @@
 \name{Exact one-sided and two-sided 1-alpha confidence interval for two dependent proportions}
 \alias{PairedCI}
-\title{Inductive confidence intervals for the difference between two proportions}
+\title{Inductive confidence intervals for the Difference Between Two Proportions}
 \description{
 Three exact confidence intervals (two-sided, smallest lower one-sided and  smallest upper one-sided)  of level 1-alpha are constructed for p1-p2,
  the difference of two dependent proportions. 
@@ -69,7 +69,6 @@ PairedCI(3,1,0,CItype='Two.sided',conf.level=0.9)
 
 }
 
-\author{Guogen Shan<Guogen.Shan@unlv.edu>, and Weizhen Wang<weizhen.wang@wright.edu>}
 
 \references{
 

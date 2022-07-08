@@ -1,6 +1,6 @@
 \name{Exact one-sided and two-sided 1-alpha confidence interval two independent proportions}
 \alias{BinomCI}
-\title{Inductive confidence intervals for the difference between two proportions}
+\title{Inductive confidence intervals for the Difference Between Two Proportions}
 \description{
 Three exact confidence intervals (two-sided, smallest lower one-sided and  smallest upper one-sided)  of level 1-alpha are constructed for p1-p2,
  the difference of two independent proportions. 
@@ -66,9 +66,10 @@ BinomCI(5,5,4,2,conf.level=0.9,CItype='Two.sided')
 
 }
 
-\author{Guogen Shan<Guogen.Shan@unlv.edu>, and Weizhen Wang<weizhen.wang@wright.edu>}
+
 
 \references{
+
 Wang, W. (2010). On construction of the smallest one-sided confidence interval for the difference of two proportions. The Annals of Statistics, 38, 1227--1243.
 
 Buehler, R. (1957). Confidence intervals for the porduct of two binomial parameters. JASA, 52, 482--493.
